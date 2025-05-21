@@ -5,9 +5,9 @@ const path = require('path');
 const { setupWebSocket } = require('./config/websocket');
 const { connectDB } = require('./config/db');
 const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/user');
-const roomRoutes = require('./routes/room');
-const messageRoutes = require('./routes/message');
+const userRoutes = require('./routes/users');
+const roomRoutes = require('./routes/rooms'); // Changed from room to rooms
+const messageRoutes = require('./routes/messages'); // Changed from message to messages
 
 // Initialize Express app
 const app = express();

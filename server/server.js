@@ -1,68 +1,57 @@
 const express = require('express');
+const socketIO = require('socket.io');
 const http = require('http');
 const path = require('path');
 const cors = require('cors');
-const dotenv = require('dotenv');
-const { Server } = require('socket.io');
-const connectDB = require('./config/db');
+const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth');
-const userRoutes = require('./routes/users');
-const roomRoutes = require('./routes/rooms');
+const userRoutes = require('./routes/user');
+const roomRoutes = require('./routes/room');
 const messageRoutes = require('./routes/messages');
-const { setupWebsocket } = require('./config/websocket');
-const authMiddleware = require('./middlewares/auth');
+const { setupWebSocket } = require('./config/websocket');
+require('dotenv').config();
 
-// Load environment variables
-dotenv.config();
-
-// Initialize Express app
 const app = express();
-
-// Create HTTP server
-const server = http.createServer(app);
-
-// Initialize Socket.io
-const io = new Server(server, {
-  cors: {
-    origin: process.env.CORS_ORIGIN || '*',
-    methods: ['GET', 'POST']
-  }
-});
-
-// Connect to database
-connectDB();
-
-// Middleware
+// Enable CORS for all routes
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Create an HTTP server
+const server = http.createServer(app);
+// Connect Socket.IO to the HTTP server
+const io = socketIO(server, {
+    cors: {
+        origin: '*', // Allow all origins
+        methods: ["GET", "POST"] // Allow these methods
+    }
+});
+const port = 3000;
 
-// Static files
+// Middleware to parse JSON bodies
+app.use(express.json());
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, '../public')));
 
-// API Routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', authMiddleware, userRoutes);
-app.use('/api/rooms', authMiddleware, roomRoutes);
-app.use('/api/messages', authMiddleware, messageRoutes);
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+})
+.then(() => console.log('Connected to MongoDB Atlas'))
+.catch(err => console.error('MongoDB connection error:', err));
 
-// Serve the main HTML file for any other requests
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+// API routes
+app.use('/auth', authRoutes);
+app.use('/users', userRoutes);
+app.use('/rooms', roomRoutes);
+app.use('/messages', messageRoutes);
+
+// WebSocket setup
+setupWebSocket(io);
+
+// Basic route
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// Setup WebSocket handlers
-setupWebsocket(io);
-
-// Start server
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err) => {
-  console.error(`Error: ${err.message}`);
-  // Close server & exit process
-  server.close(() => process.exit(1));
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
