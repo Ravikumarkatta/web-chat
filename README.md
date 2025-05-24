@@ -1,4 +1,4 @@
-# ChatSphere 🌐💬
+# Web-Chat 🌐💬
 
 A modern, real-time chat application built with WebSocket technology, featuring secure authentication, room-based messaging, and an intuitive user interface.
 
