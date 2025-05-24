@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { JWT_SECRET } = require('../config');
+const { JWT_SECRET } = require('../../config/config');
 
 // Authentication middleware
 const authenticate = (req, res, next) => {
