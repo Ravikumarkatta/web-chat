@@ -1,4 +1,4 @@
-# ChatSphere Development Timeline
+# Web chat Development Timeline
 
 ## Phase 1: Core Setup (Current Phase)
 - [x] Project structure planning
