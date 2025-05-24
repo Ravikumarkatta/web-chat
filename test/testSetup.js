@@ -4,7 +4,7 @@ const { DB_URI } = require('../server/config/config');
 
 beforeAll(async () => {
   // Use a separate test database
-  const testDBUri = 'mongodb+srv://kattaravi000:<ufIVC7of4RPoAslY>@cluster0.jlhtgsy.mongodb.net/';
+  const testDBUri = 'mongodb+srv://kattaravi000:<password>@cluster0.jlhtgsy.mongodb.net/';
   process.env.DB_URI = testDBUri; // Ensure DB_URI is set
   try {
     await connectDB();
