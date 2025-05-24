@@ -1,4 +1,4 @@
-# ChatSphere Project Structure
+# Web chat Project Structure
 
 ## Frontend
 - `/public/`
