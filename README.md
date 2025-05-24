@@ -2,7 +2,6 @@
 
 A modern, real-time chat application built with WebSocket technology, featuring secure authentication, room-based messaging, and an intuitive user interface.
 
-![ChatSphere Banner](https://via.placeholder.com/800x200/4F46E5/FFFFFF?text=Chat+-+Real-Time+Chat+Platform)
 
 ## 📋 Table of Contents
 
@@ -21,7 +20,7 @@ A modern, real-time chat application built with WebSocket technology, featuring 
 
 ## 🌟 Overview
 
-ChatSphere is a full-stack real-time chat application designed for seamless communication across multiple chat rooms. Built with modern web technologies, it provides a Discord-like experience with features such as user authentication, room management, typing indicators, and file sharing capabilities.
+Web-chat is a full-stack real-time chat application designed for seamless communication across multiple chat rooms. Built with modern web technologies, it provides a Discord-like experience with features such as user authentication, room management, typing indicators, and file sharing capabilities.
 
 ### Key Highlights
 
@@ -155,7 +154,7 @@ sequenceDiagram
 ## 📁 Project Structure
 
 ```
-ChatSphere/
+Web-chat/
 ├── 📂 public/                    # Frontend static files
 │   ├── 📄 index.html            # Main HTML file
 │   ├── 📄 styles.css            # Additional CSS styles
@@ -217,7 +216,7 @@ ChatSphere/
 1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/web-chat.git
-   cd chatsphere
+   cd Web-chat
    ```
 
 2. **Install dependencies**
@@ -237,7 +236,7 @@ ChatSphere/
    NODE_ENV=development
    
    # Database Configuration
-   MONGODB_URI=mongodb://localhost:27017/chatsphere
+   MONGODB_URI=mongodb://localhost:27017/Web-chat
    REDIS_URL=redis://localhost:6379
    
    # Authentication
@@ -668,7 +667,7 @@ services:
       - "80:3001"
     environment:
       - NODE_ENV=production
-      - MONGODB_URI=mongodb://mongo:27017/chatsphere
+      - MONGODB_URI=mongodb://mongo:27017/Web-chat
       - REDIS_URL=redis://redis:6379
     depends_on:
       - mongo
@@ -704,16 +703,16 @@ volumes:
 
 ```bash
 # Deploy to AWS ECS
-aws ecs create-cluster --cluster-name chatsphere-cluster
+aws ecs create-cluster --cluster-name Web-chat-cluster
 
 # Create task definition
 aws ecs register-task-definition --cli-input-json file://task-definition.json
 
 # Create service
 aws ecs create-service \
-  --cluster chatsphere-cluster \
-  --service-name chatsphere-service \
-  --task-definition chatsphere:1 \
+  --cluster Web-chat-cluster \
+  --service-name Web-chat-service \
+  --task-definition Web-chat:1 \
   --desired-count 2
 ```
 
@@ -724,7 +723,7 @@ aws ecs create-service \
 heroku login
 
 # Create new app
-heroku create chatsphere-app
+heroku create Web-chat-app
 
 # Add MongoDB addon
 heroku addons:create mongolab:sandbox
@@ -749,7 +748,7 @@ NODE_ENV=production
 PORT=3001
 
 # Database URLs
-MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/chatsphere
+MONGODB_URI=mongodb+srv://user:pass@cluster.mongodb.net/Web-chat
 REDIS_URL=redis://redis-server:6379
 
 # Security
@@ -759,7 +758,7 @@ SESSION_SECRET=another-secure-secret
 # File Storage
 AWS_ACCESS_KEY_ID=your-aws-access-key
 AWS_SECRET_ACCESS_KEY=your-aws-secret-key
-S3_BUCKET_NAME=chatsphere-files
+S3_BUCKET_NAME=Web-chat-files
 
 # Email Service
 SENDGRID_API_KEY=your-sendgrid-api-key
