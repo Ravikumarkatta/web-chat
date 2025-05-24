@@ -1,4 +1,4 @@
-// Utility functions for ChatSphere
+// Utility functions for Web chat
 class Utils {
   static formatDate(timestamp) {
     const date = new Date(timestamp);
