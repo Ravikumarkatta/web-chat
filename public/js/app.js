@@ -1,4 +1,4 @@
-// Authentication logic for ChatSphere
+// Authentication logic for Webchat
 class AuthService {
   constructor(apiBaseUrl) {
     this.apiBaseUrl = apiBaseUrl;
