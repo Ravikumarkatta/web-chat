@@ -1,4 +1,4 @@
-// WebSocket client implementation for ChatSphere
+// WebSocket client implementation for Web chat
 class ChatClient {
   constructor(url) {
     this.socket = new WebSocket(url);
