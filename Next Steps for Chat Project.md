@@ -1,4 +1,4 @@
-## Next Steps for ChatSphere Project
+## Next Steps for Web chat Project
 
 1. __Frontend Development__
 
